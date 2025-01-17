@@ -1,3 +1,5 @@
+# Explicit Type Casting
+
 # Integer to other types
 int_value = 10
 float_value = float(int_value)  # int to float
