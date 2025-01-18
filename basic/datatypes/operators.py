@@ -69,3 +69,96 @@ str3 = "Hello"
 str4 = "Hello"
 print(str3 is str4)  # is: True (both refer to the same object)
 print(str3 is not str4)  # is not: False (both refer to the same object)
+
+
+
+# Advanced examples of assignment operators with pre-increment, post-increment, pre-decrement, and post-decrement
+
+# Pre-increment
+f = 5
+f = f + 1
+print(f)  # 6
+
+# Post-increment
+g = 5
+print(g)  # 5
+g = g + 1
+
+# Pre-decrement
+h = 5
+h = h - 1
+print(h)  # 4
+
+# Post-decrement
+i = 5
+print(i)  # 5
+i = i - 1
+
+# Using functions to simulate pre-increment and post-increment
+def pre_increment(val):
+    val += 1
+    return val
+
+def post_increment(val):
+    original_val = val
+    val += 1
+    return original_val, val
+
+def pre_decrement(val):
+    val -= 1
+    return val
+
+def post_decrement(val):
+    original_val = val
+    val -= 1
+    return original_val, val
+
+# Pre-increment
+j = 5
+j = pre_increment(j)
+print(j)  # 6
+
+# Post-increment
+k = 5
+k, new_k = post_increment(k)
+print(k)  # 5
+print(new_k)  # 6
+
+# Pre-decrement
+l = 5
+l = pre_decrement(l)
+print(l)  # 4
+
+# Post-decrement
+m = 5
+m, new_m = post_decrement(m)
+print(m)  # 5
+print(new_m)  # 4
+
+# More complex examples
+n = 10
+n += 1  # Pre-increment
+print(n)  # 11
+
+o = 10
+print(o)  # 10
+o += 1  # Post-increment
+
+p = 10
+p -= 1  # Pre-decrement
+print(p)  # 9
+
+q = 10
+print(q)  # 10
+q -= 1  # Post-decrement
+
+# Using loops with pre-increment and post-increment
+r = 0
+for _ in range(5):
+    r += 1  # Pre-increment
+print(r)  # 5
+
+s = 0
+for _ in range(5):
+    print(s)  # Post-increment
+    s += 1
