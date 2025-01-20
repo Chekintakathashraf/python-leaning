@@ -100,6 +100,30 @@ print(nested_dict)  # {'dictA': {'key1': 'new_value1'}, 'dictB': {'key2': 'value
 del dict2['key2']
 print(dict2)  # {}
 
+# Sorting dictionary by keys
+sorted_by_keys = dict(sorted(dict2.items()))
+print(sorted_by_keys)  # {'key2': 'value2', 'key3': 'value3'}
+
+# Sorting dictionary by values
+sorted_by_values = dict(sorted(dict2.items(), key=lambda item: item[1]))
+print(sorted_by_values)  # {'key2': 'value2', 'key3': 'value3'}
+
+# Sorting dictionary by keys in reverse order
+sorted_by_keys_reverse = dict(sorted(dict2.items(), reverse=True))
+print(sorted_by_keys_reverse)  # {'key3': 'value3', 'key2': 'value2'}
+
+# Sorting dictionary by values in reverse order
+sorted_by_values_reverse = dict(sorted(dict2.items(), key=lambda item: item[1], reverse=True))
+print(sorted_by_values_reverse)  # {'key3': 'value3', 'key2': 'value2'}
+
+# Sorting dictionary by length of keys
+sorted_by_key_length = dict(sorted(dict2.items(), key=lambda item: len(item[0])))
+print(sorted_by_key_length)  # {'key2': 'value2', 'key3': 'value3'}
+
+# Sorting dictionary by length of values
+sorted_by_value_length = dict(sorted(dict2.items(), key=lambda item: len(item[1])))
+print(sorted_by_value_length)  # {'key2': 'value2', 'key3': 'value3'}
+
 # Dictionary with tuple keys
 tuple_key_dict = {(1, 2): 'value1', (3, 4): 'value2'}
 print(tuple_key_dict)  # {(1, 2): 'value1', (3, 4): 'value2'}
