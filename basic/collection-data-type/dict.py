@@ -1,158 +1,366 @@
-# Example 1: Creating a dictionary
-my_dict = {'name': 'John', 'age': 25, 'city': 'New York'}
+from collections import defaultdict
+from collections import OrderedDict
+from collections import Counter
+from collections import namedtuple
+from collections import deque
+from collections import ChainMap
+from collections import UserDict
+from collections import UserList
+from collections import UserString
 
-# Example 2: Accessing a value by key
-print(my_dict['name'])  # Output: John
+# Adding items to a dictionary
+dict1 = {}
+dict1['key1'] = 'value1'
+dict1['key2'] = 'value2'
+print(dict1)  # {'key1': 'value1', 'key2': 'value2'}
 
-# Example 3: Adding a new key-value pair
-my_dict['email'] = 'john@example.com'
+# Updating items in a dictionary
+dict1['key1'] = 'new_value1'
+print(dict1)  # {'key1': 'new_value1', 'key2': 'value2'}
 
-# Example 4: Updating an existing value
-my_dict['age'] = 26
+# Clearing a dictionary
+dict1.clear()
+print(dict1)  # {}
 
-# Example 5: Deleting a key-value pair
-del my_dict['city']
+# Copying a dictionary
+dict2 = {'key1': 'value1', 'key2': 'value2'}
+dict3 = dict2.copy()
+print(dict3)  # {'key1': 'value1', 'key2': 'value2'}
 
-# Example 6: Using the get() method
-print(my_dict.get('name'))  # Output: John
+# Looping through a dictionary
+for key in dict2:
+    print(key, dict2[key])  # key1 value1 \n key2 value2
 
-# Example 7: Using the keys() method
-print(my_dict.keys())  # Output: dict_keys(['name', 'age', 'email'])
+# Dictionary comprehension
+dict4 = {x: x**2 for x in range(5)}
+print(dict4)  # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
 
-# Example 8: Using the values() method
-print(my_dict.values())  # Output: dict_values(['John', 26, 'john@example.com'])
+# Joining two dictionaries
+dict5 = {'a': 1, 'b': 2}
+dict6 = {'c': 3, 'd': 4}
+dict7 = {**dict5, **dict6}
+print(dict7)  # {'a': 1, 'b': 2, 'c': 3, 'd': 4}
 
-# Example 9: Using the items() method
-print(my_dict.items())  # Output: dict_items([('name', 'John'), ('age', 26), ('email', 'john@example.com')])
+# Using the get method
+value = dict2.get('key1')
+print(value)  # value1
 
-# Example 10: Looping through keys
-for key in my_dict:
-    print(key)
+# Using the setdefault method
+dict2.setdefault('key3', 'value3')
+print(dict2)  # {'key1': 'value1', 'key2': 'value2', 'key3': 'value3'}
 
-# Example 11: Looping through values
-for value in my_dict.values():
-    print(value)
+# Using the pop method
+popped_value = dict2.pop('key1')
+print(popped_value)  # value1
+print(dict2)  # {'key2': 'value2', 'key3': 'value3'}
 
-# Example 12: Looping through key-value pairs
-for key, value in my_dict.items():
-    print(f"{key}: {value}")
+# Using the popitem method
+popped_item = dict2.popitem()
+print(popped_item)  # ('key3', 'value3')
+print(dict2)  # {'key2': 'value2'}
 
-# Example 13: Checking if a key exists
-if 'name' in my_dict:
-    print('Name is present')
+# Using the keys method
+keys = dict2.keys()
+print(keys)  # dict_keys(['key2'])
 
-# Example 14: Using the pop() method
-my_dict.pop('email')
+# Using the values method
+values = dict2.values()
+print(values)  # dict_values(['value2'])
 
-# Example 15: Using the popitem() method
-my_dict.popitem()
+# Using the items method
+items = dict2.items()
+print(items)  # dict_items([('key2', 'value2')])
 
-# Example 16: Using the clear() method
-my_dict.clear()
+# Checking if a key exists in a dictionary
+exists = 'key2' in dict2
+print(exists)  # True
 
-# Example 17: Using the copy() method
-my_dict = {'name': 'John', 'age': 25}
-new_dict = my_dict.copy()
+# Merging dictionaries using update method
+dict8 = {'e': 5, 'f': 6}
+dict5.update(dict8)
+print(dict5)  # {'a': 1, 'b': 2, 'e': 5, 'f': 6}
 
-# Example 18: Using the fromkeys() method
-keys = ['name', 'age', 'city']
-default_value = None
-new_dict = dict.fromkeys(keys, default_value)
+# Creating a dictionary with fromkeys method
+keys = ['a', 'b', 'c']
+dict9 = dict.fromkeys(keys, 0)
+print(dict9)  # {'a': 0, 'b': 0, 'c': 0}
 
-# Example 19: Using the setdefault() method
-my_dict.setdefault('email', 'john@example.com')
+# Nested dictionaries
+nested_dict = {'dictA': {'key1': 'value1'}, 'dictB': {'key2': 'value2'}}
+print(nested_dict)  # {'dictA': {'key1': 'value1'}, 'dictB': {'key2': 'value2'}}
 
-# Example 20: Nested dictionary
-nested_dict = {'person': {'name': 'John', 'age': 25}, 'address': {'city': 'New York', 'zip': '10001'}}
+# Accessing nested dictionary items
+print(nested_dict['dictA']['key1'])  # value1
 
-# Example 21: Accessing nested dictionary
-print(nested_dict['person']['name'])  # Output: John
+# Updating nested dictionary items
+nested_dict['dictA']['key1'] = 'new_value1'
+print(nested_dict)  # {'dictA': {'key1': 'new_value1'}, 'dictB': {'key2': 'value2'}}
 
-# Example 22: Updating nested dictionary
-nested_dict['person']['age'] = 26
+# Deleting items from a dictionary
+del dict2['key2']
+print(dict2)  # {}
 
-# Example 23: Adding to nested dictionary
-nested_dict['address']['street'] = '5th Avenue'
+# Dictionary with tuple keys
+tuple_key_dict = {(1, 2): 'value1', (3, 4): 'value2'}
+print(tuple_key_dict)  # {(1, 2): 'value1', (3, 4): 'value2'}
 
-# Example 24: Deleting from nested dictionary
-del nested_dict['address']['zip']
+# Dictionary with list values
+list_value_dict = {'key1': [1, 2, 3], 'key2': [4, 5, 6]}
+print(list_value_dict)  # {'key1': [1, 2, 3], 'key2': [4, 5, 6]}
 
-# Example 25: Dictionary comprehension
-squares = {x: x*x for x in range(6)}
+# Dictionary with mixed data types
+mixed_dict = {'key1': 1, 'key2': 'value2', 'key3': [1, 2, 3]}
+print(mixed_dict)  # {'key1': 1, 'key2': 'value2', 'key3': [1, 2, 3]}
 
-# Example 26: Dictionary with mixed keys
-mixed_dict = {1: 'apple', 'two': 2, (3, 4): 'tuple'}
+# Dictionary with boolean values
+bool_dict = {'key1': True, 'key2': False}
+print(bool_dict)  # {'key1': True, 'key2': False}
 
-# Example 27: Using the update() method
-my_dict.update({'city': 'New York', 'email': 'john@example.com'})
+# Dictionary with None values
+none_dict = {'key1': None, 'key2': 'value2'}
+print(none_dict)  # {'key1': None, 'key2': 'value2'}
 
-# Example 28: Using the len() function
-print(len(my_dict))  # Output: 4
+# Dictionary with function values
+def my_func():
+    return 'Hello, World!'
 
-# Example 29: Using the any() function
-print(any(my_dict))  # Output: True
+func_dict = {'key1': my_func}
+print(func_dict['key1']())  # Hello, World!
 
-# Example 30: Using the all() function
-print(all(my_dict))  # Output: True
+# Dictionary with lambda function values
+lambda_dict = {'key1': lambda x: x * 2}
+print(lambda_dict['key1'](5))  # 10
 
-# Example 31: Using the sorted() function
-sorted_keys = sorted(my_dict)
+# Dictionary with class instances
+class MyClass:
+    def __init__(self, value):
+        self.value = value
 
-# Example 32: Using the dict() constructor
-new_dict = dict(name='John', age=25, city='New York')
+instance_dict = {'key1': MyClass(10)}
+print(instance_dict['key1'].value)  # 10
 
-# Example 33: Using the zip() function to create a dictionary
-keys = ['name', 'age', 'city']
-values = ['John', 25, 'New York']
-zipped_dict = dict(zip(keys, values))
+# Dictionary with default values using defaultdict
+default_dict = defaultdict(int)
+default_dict['key1'] += 1
+print(default_dict)  # defaultdict(<class 'int'>, {'key1': 1})
 
-# Example 34: Using the enumerate() function
-for index, key in enumerate(my_dict):
-    print(index, key)
+# Dictionary with ordered keys using OrderedDict
+ordered_dict = OrderedDict()
+ordered_dict['key1'] = 'value1'
+ordered_dict['key2'] = 'value2'
+print(ordered_dict)  # OrderedDict([('key1', 'value1'), ('key2', 'value2')])
 
-# Example 35: Using the max() function
-max_key = max(my_dict)
+# Dictionary with counter using Counter
+counter_dict = Counter(['a', 'b', 'c', 'a', 'b', 'a'])
+print(counter_dict)  # Counter({'a': 3, 'b': 2, 'c': 1})
 
-# Example 36: Using the min() function
-min_key = min(my_dict)
+# Dictionary with namedtuple values
+Person = namedtuple('Person', 'name age')
+namedtuple_dict = {'person1': Person('Alice', 30), 'person2': Person('Bob', 25)}
+print(namedtuple_dict)  # {'person1': Person(name='Alice', age=30), 'person2': Person(name='Bob', age=25)}
 
-# Example 37: Using the sum() function
-numeric_dict = {'a': 1, 'b': 2, 'c': 3}
-total = sum(numeric_dict.values())
+# Dictionary with deque values
+deque_dict = {'key1': deque([1, 2, 3])}
+print(deque_dict)  # {'key1': deque([1, 2, 3])}
 
-# Example 38: Using the dict() with keyword arguments
-new_dict = dict(name='John', age=25)
+# Dictionary with ChainMap
+dict10 = {'key1': 'value1'}
+dict11 = {'key2': 'value2'}
+chainmap_dict = ChainMap(dict10, dict11)
+print(chainmap_dict)  # ChainMap({'key1': 'value1'}, {'key2': 'value2'})
 
-# Example 39: Using the dict() with a list of tuples
-tuple_list = [('name', 'John'), ('age', 25)]
-new_dict = dict(tuple_list)
+# Dictionary with UserDict
+class MyDict(UserDict):
+    def __setitem__(self, key, value):
+        super().__setitem__(key, value * 2)
 
-# Example 40: Using the dict() with a list of lists
-list_list = [['name', 'John'], ['age', 25]]
-new_dict = dict(list_list)
+user_dict = MyDict()
+user_dict['key1'] = 10
+print(user_dict)  # {'key1': 20}
 
-# Example 41: Using the dict() with a list of dictionaries
-dict_list = [{'name': 'John'}, {'age': 25}]
-new_dict = {k: v for d in dict_list for k, v in d.items()}
+# Dictionary with UserList
+class MyList(UserList):
+    def append(self, item):
+        super().append(item * 2)
 
-# Example 42: Using the dict() with a set of tuples
-tuple_set = {('name', 'John'), ('age', 25)}
-new_dict = dict(tuple_set)
+user_list_dict = {'key1': MyList([1, 2, 3])}
+user_list_dict['key1'].append(4)
+print(user_list_dict)  # {'key1': [1, 2, 3, 8]}
 
-# Example 43: Using the dict() with a set of lists
-list_set = {('name', 'John'), ('age', 25)}
-new_dict = dict(list_set)
+# Dictionary with UserString
+class MyString(UserString):
+    def __add__(self, other):
+        return MyString(super().__add__(other).upper())
 
-# Example 44: Using the dict() with a set of dictionaries
-dict_set = [{'name': 'John'}, {'age': 25}]
-new_dict = {k: v for d in dict_set for k, v in d.items()}
+user_string_dict = {'key1': MyString('hello')}
+user_string_dict['key1'] += ' world'
+print(user_string_dict)  # {'key1': 'HELLO WORLD'}
 
-# Example 48: Using the dict() with a generator expression
-gen_expr = ((x, x*x) for x in range(6))
-new_dict = dict(gen_expr)
+# Dictionary with frozenset keys
+frozenset_key_dict = {frozenset([1, 2, 3]): 'value1'}
+print(frozenset_key_dict)  # {frozenset({1, 2, 3}): 'value1'}
 
-# Example 49: Using the dict() with a dictionary comprehension
-comp_dict = {x: x*x for x in range(6)}
+# Dictionary with complex keys
+complex_key_dict = {complex(1, 2): 'value1'}
+print(complex_key_dict)  # {(1+2j): 'value1'}
 
-# Example 50: Using the dict() with a dictionary comprehension and condition
-comp_cond_dict = {x: x*x for x in range(6) if x % 2 == 0}
+# Dictionary with bytes keys
+bytes_key_dict = {b'key1': 'value1'}
+print(bytes_key_dict)  # {b'key1': 'value1'}
+
+# Dictionary with bytearray keys
+bytearray_key_dict = {bytearray(b'key1'): 'value1'}
+print(bytearray_key_dict)  # {bytearray(b'key1'): 'value1'}
+
+# Dictionary with memoryview keys
+memoryview_key_dict = {memoryview(b'key1'): 'value1'}
+print(memoryview_key_dict)  # {<memory at 0x7f8c8c8c8c40>: 'value1'}
+
+# Dictionary with range keys
+range_key_dict = {range(5): 'value1'}
+print(range_key_dict)  # {range(0, 5): 'value1'}
+
+# Dictionary with slice keys
+slice_key_dict = {slice(1, 5): 'value1'}
+print(slice_key_dict)  # {slice(1, 5, None): 'value1'}
+
+# Dictionary with Ellipsis keys
+ellipsis_key_dict = {Ellipsis: 'value1'}
+print(ellipsis_key_dict)  # {Ellipsis: 'value1'}
+
+# Dictionary with NotImplemented keys
+not_implemented_key_dict = {NotImplemented: 'value1'}
+print(not_implemented_key_dict)  # {NotImplemented: 'value1'}
+
+# Dictionary with None keys
+none_key_dict = {None: 'value1'}
+print(none_key_dict)  # {None: 'value1'}
+
+# Dictionary with boolean keys
+boolean_key_dict = {True: 'value1', False: 'value2'}
+print(boolean_key_dict)  # {True: 'value1', False: 'value2'}
+
+# Dictionary with integer keys
+integer_key_dict = {1: 'value1', 2: 'value2'}
+print(integer_key_dict)  # {1: 'value1', 2: 'value2'}
+
+# Dictionary with float keys
+float_key_dict = {1.1: 'value1', 2.2: 'value2'}
+print(float_key_dict)  # {1.1: 'value1', 2.2: 'value2'}
+
+# Dictionary with string keys
+string_key_dict = {'key1': 'value1', 'key2': 'value2'}
+print(string_key_dict)  # {'key1': 'value1', 'key2': 'value2'}
+
+# Dictionary with list keys (not allowed, will raise TypeError)
+# list_key_dict = {[1, 2, 3]: 'value1'}  # TypeError: unhashable type: 'list'
+
+# Dictionary with set keys (not allowed, will raise TypeError)
+# set_key_dict = {set([1, 2, 3]): 'value1'}  # TypeError: unhashable type: 'set'
+
+# Dictionary with dictionary keys (not allowed, will raise TypeError)
+# dict_key_dict = {{'key1': 'value1'}: 'value2'}  # TypeError: unhashable type: 'dict'
+
+# Dictionary with custom object keys
+class CustomKey:
+    def __init__(self, value):
+        self.value = value
+
+    def __hash__(self):
+        return hash(self.value)
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+custom_key_dict = {CustomKey(1): 'value1'}
+print(custom_key_dict)  # {<__main__.CustomKey object at 0x7f8c8c8c8c40>: 'value1'}
+
+# Dictionary with custom object values
+class CustomValue:
+    def __init__(self, value):
+        self.value = value
+
+custom_value_dict = {'key1': CustomValue(1)}
+print(custom_value_dict['key1'].value)  # 1
+
+# Dictionary with custom object keys and values
+custom_key_value_dict = {CustomKey(1): CustomValue(1)}
+print(custom_key_value_dict[CustomKey(1)].value)  # 1
+
+# Dictionary with custom object keys and values using __repr__
+class CustomKeyRepr:
+    def __init__(self, value):
+        self.value = value
+
+    def __hash__(self):
+        return hash(self.value)
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def __repr__(self):
+        return f'CustomKeyRepr({self.value})'
+
+class CustomValueRepr:
+    def __init__(self, value):
+        self.value = value
+
+    def __repr__(self):
+        return f'CustomValueRepr({self.value})'
+
+custom_key_value_repr_dict = {CustomKeyRepr(1): CustomValueRepr(1)}
+print(custom_key_value_repr_dict)  # {CustomKeyRepr(1): CustomValueRepr(1)}
+
+# Dictionary with custom object keys and values using __str__
+class CustomKeyStr:
+    def __init__(self, value):
+        self.value = value
+
+    def __hash__(self):
+        return hash(self.value)
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def __str__(self):
+        return f'CustomKeyStr({self.value})'
+
+class CustomValueStr:
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return f'CustomValueStr({self.value})'
+
+custom_key_value_str_dict = {CustomKeyStr(1): CustomValueStr(1)}
+print(custom_key_value_str_dict)  # {CustomKeyStr(1): CustomValueStr(1)}
+
+# Dictionary with custom object keys and values using __repr__ and __str__
+class CustomKeyReprStr:
+    def __init__(self, value):
+        self.value = value
+
+    def __hash__(self):
+        return hash(self.value)
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def __repr__(self):
+        return f'CustomKeyReprStr({self.value})'
+
+    def __str__(self):
+        return f'CustomKeyReprStr({self.value})'
+
+class CustomValueReprStr:
+    def __init__(self, value):
+        self.value = value
+
+    def __repr__(self):
+        return f'CustomValueReprStr({self.value})'
+
+    def __str__(self):
+        return f'CustomValueReprStr({self.value})'
+
+custom_key_value_repr_str_dict = {CustomKeyReprStr(1): CustomValueReprStr(1)}
+print(custom_key_value_repr_str_dict)  # {CustomKeyReprStr(1): CustomValueReprStr(1)}
