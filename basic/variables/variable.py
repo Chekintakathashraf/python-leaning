@@ -348,3 +348,104 @@ Explanation:
     The global scope is accessed using globals()['x'].
     """
     
+#Example 4: Using global and nonlocal in Class Methods
+
+x = "global x"
+
+class Test:
+    x = "class x"
+
+    def outer_method(self):
+        nonlocal_x = "outer x"
+
+        def inner_method():
+            nonlocal nonlocal_x  # Modify the outer_method's variable
+            nonlocal_x = "modified outer x"
+
+            global x  # Modify the global variable
+            x = "modified global x"
+
+        inner_method()
+        print("After inner_method in outer_method:", nonlocal_x)
+
+obj = Test()
+obj.outer_method()
+print("Global scope after modification:", x)
+
+# if u want to use same x for local,global,
+
+# a variable cannot be both global and nonlocal within the same function. If you try to declare x as both, Python throws the error: SyntaxError: name 'x' is assigned to before global declaration.
+
+#output
+"""
+After inner_method in outer_method: modified outer x
+Global scope after modification: modified global x
+
+Explanation:
+
+    nonlocal x modifies outer x inside outer_method.
+    global x modifies the global x outside the class.
+    """
+    
+#Example 5: Multiple Nested Classes with LEGB
+
+x = "global x"
+
+class Outer:
+    x = "outer class x"
+
+    class Inner:
+        x = "inner class x"
+
+        def inner_method(self):
+            x = "local x"
+            print("Local:", x)
+            print("Enclosing (Outer class):", Outer.x)
+            print("Class (Inner class):", self.x)
+            print("Global:", globals()['x'])
+
+obj = Outer.Inner()
+obj.inner_method()
+
+#output
+"""
+Local: local x
+Enclosing (Outer class): outer class x
+Class (Inner class): inner class x
+Global: global x
+
+Explanation:
+
+    The local variable x inside the method shadows all others.
+    Outer.x refers to the outer class variable.
+    self.x accesses the inner class variable.
+    The global variable x is retrieved using globals()['x'].
+    """
+
+#Example 6: Overriding Built-in Scope in Classes
+
+class OverrideExample:
+    len = 100  # Overrides built-in len
+
+    def check_len(self):
+        len = 50  # Local scope
+        print("Local len:", len)
+        print("Class len:", self.len)
+        print("Built-in len:", __builtins__.len([1, 2, 3]))
+
+obj = OverrideExample()
+obj.check_len()
+
+#output
+"""
+Local len: 50
+Class len: 100
+Built-in len: 3
+
+Explanation:
+
+    The method variable len shadows the class variable.
+    The class variable len shadows the built-in len.
+    The built-in len() is accessed using __builtins__.len().
+    """
+    
