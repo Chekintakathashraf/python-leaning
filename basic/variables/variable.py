@@ -131,4 +131,102 @@ outer() prints "enclosing outer x", the variable in the enclosing outer function
 Finally, the global variable "global x" is printed outside all functions.
 """
 
+#Example 4: Demonstrating global and nonlocal in Nested Functions
+
+x = "global x"
+
+def outer():
+    x = "enclosing x"
+
+    def inner1():
+        nonlocal x
+        x = "modified enclosing x"
+        
+        def inner2():
+            global x
+            x = "modified global x"
+            print("Inside inner2:", x)
+        
+        inner2()
+        print("Inside inner1:", x)
+
+    inner1()
+    print("Inside outer:", x)
+
+outer()
+print("In global scope:", x)
+
+#output
+"""
+Inside inner2: modified global x
+Inside inner1: modified enclosing x
+Inside outer: modified enclosing x
+In global scope: modified global x
+
+Explanation:
+
+    inner2() modifies the global x using global x.
+    inner1() modifies the enclosing x using nonlocal x.
+    The changes reflect accordingly when accessed in different scopes.
+    
+    """
+    
+#Example 5: LEGB with Built-in Scope
+    
+def my_function():
+    len = 5  # Overrides built-in len function
+    print("Length:", len)
+
+my_function()
+
+# Using built-in len function outside the function scope
+print("Actual length:", len([1, 2, 3, 4]))
+
+"""
+Length: 5
+Actual length: 4
+
+Explanation:
+
+    Inside my_function, the built-in len is overridden by a local variable.
+    Outside the function, the actual len() function works correctly.
+    """
+    
+#Example 6: Mixing Local, Nonlocal, and Global Scopes
+
+x = "global"
+
+def outer():
+    x = "outer"
+
+    def inner():
+        nonlocal x
+        x = "inner"
+
+        def innermost():
+            global x
+            x = "global modified"
+        
+        innermost()
+        print("Inside inner:", x)
+
+    inner()
+    print("Inside outer:", x)
+
+outer()
+print("In global scope:", x)
+
+#output
+"""
+Inside inner: inner
+Inside outer: inner
+In global scope: global modified
+
+Explanation:
+
+    nonlocal in inner() modifies outer's x.
+    global in innermost() modifies the global x.
+    """
+    
+    
 
