@@ -1,3 +1,5 @@
+#LEGB Rule in Python (functional-Based Explanation)
+
 """
     Python LEGB Rule (Scope Resolution)
 
@@ -230,3 +232,119 @@ Explanation:
     
     
 
+#LEGB Rule in Python (Class-Based Explanation)
+
+"""
+
+When dealing with classes in Python, the LEGB rule still applies, but with a few nuances due to the object-oriented structure. In a class-based context, scope resolution works slightly differently because:
+
+    Instance (Object) Scope: Variables stored in self (instance attributes).
+    Class Scope: Variables shared across instances, stored in the class definition.
+    Global Scope: Variables defined outside the class.
+    Built-in Scope: Standard Python built-in functions and names.
+    
+    """
+    
+#Example 1: Basic Class-Based LEGB Example
+
+x = "global x"  # Global scope
+
+class MyClass:
+    x = "class x"  # Class scope (Enclosing)
+
+    def my_method(self):
+        x = "local x"  # Local scope
+        print("Inside method:", x)
+
+obj = MyClass()
+obj.my_method()
+print("In class scope:", obj.x)
+print("In global scope:", x)
+
+#output
+"""
+Inside method: local x
+In class scope: class x
+In global scope: global x
+
+Explanation:
+
+    Inside my_method, x refers to the local scope.
+    The x inside the class refers to the class-level scope.
+    Outside the class, the global x is accessed.
+    """
+    
+#Example 2: Using self for Instance Attributes (Local vs Instance Scope)
+
+x = "global x"
+
+class Example:
+    x = "class x"
+
+    def __init__(self, x):
+        self.x = x  # Instance variable (specific to an object)
+
+    def show_x(self):
+        x = "local x"
+        print("Local scope:", x)
+        print("Instance scope:", self.x)
+        print("Class scope:", Example.x)
+        print("Global scope:", globals()['x'])
+
+obj = Example("instance x")
+obj.show_x()
+
+#output
+"""
+Local scope: local x
+Instance scope: instance x
+Class scope: class x
+Global scope: global x
+
+Explanation:
+
+    self.x accesses the instance attribute.
+    Example.x accesses the class attribute.
+    globals()['x'] retrieves the global x.
+    The local variable inside the method shadows all others.
+    """
+
+#Example 3: Accessing Enclosing Scope in Nested Methods
+
+class OuterClass:
+    x = "class x"
+
+    def outer_method(self):
+        x = "outer x"
+
+        class InnerClass:
+            def inner_method(self):
+                x = "inner x"
+                print("Local scope:", x)
+                print("Enclosing scope:", outer_instance.x)
+                print("Class scope:", OuterClass.x)
+                print("Global scope:", globals()['x'])
+
+        outer_instance = OuterClass()
+        inner_obj = InnerClass()
+        inner_obj.inner_method()
+
+x = "global x"
+obj = OuterClass()
+obj.outer_method()
+
+#output
+"""
+Local scope: inner x
+Enclosing scope: outer x
+Class scope: class x
+Global scope: global x
+
+Explanation:
+
+    The method inner_method() has its own local scope.
+    The enclosing function variable from outer_method() is accessed using outer_instance.x.
+    Class-level scope is accessed via OuterClass.x.
+    The global scope is accessed using globals()['x'].
+    """
+    
