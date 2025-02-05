@@ -1,20 +1,36 @@
-# Pre-increment 
-f = 5 
-f = f + 1 
-print(f)  # 6 
+def pre_increment(x):
+    x += 1  # First increment
+    return x  # Then return the new value
 
-# Post-increment 
-g = 5 
-print(g)  # 5 
-g = g + 1 
+def post_increment(x):
+    old_value = x  # Store current value
+    x += 1  # Then increment
+    return old_value  # Return original value
 
-# Pre-decrement 
-h = 5 
-h = h - 1 
-print(h)  # 4 
+def pre_decrement(x):
+    x -= 1  # First decrement
+    return x  # Then return the new value
 
+def post_decrement(x):
+    old_value = x  # Store current value
+    x -= 1  # Then decrement
+    return old_value  # Return original value
 
-# Post-decrement 
-i = 5 
-print(i)  # 5 
-i = i - 1 
+if __name__ == "__main__":
+    a = 5
+    
+    # Pre-Increment
+    a = pre_increment(a)
+    print("After Pre-Increment:", a)  # Output: 6
+    
+    # Post-Increment
+    b = post_increment(a)
+    print("After Post-Increment:", b, a)  # Output: 6 7
+    
+    # Pre-Decrement
+    a = pre_decrement(a)
+    print("After Pre-Decrement:", a)  # Output: 6
+    
+    # Post-Decrement
+    b = post_decrement(a)
+    print("After Post-Decrement:", b, a)  # Output: 6 5
