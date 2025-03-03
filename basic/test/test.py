@@ -37,21 +37,34 @@
 #     print(i,'-',e)
 
 
-l = [1,2] * 3
-print(l)
-print(l[0])
-print(l[1])
-print(l[2])
-print(l[3])
+# l = [1,2] * 3
+# print(l)
+# print(l[0])
+# print(l[1])
+# print(l[2])
+# print(l[3])
 
 
-print(l[0] is l[1])
-print(l[0] is l[2])
+# print(l[0] is l[1])
+# print(l[0] is l[2])
 
-l[0] = 3
+# l[0] = 3
 
-print(l[0])
-print(l[1])
-print(l[2])
-print(l[3])
-print(l[4])
+# print(l[0])
+# print(l[1])
+# print(l[2])
+# print(l[3])
+# print(l[4])
+
+def generate_pattern(n):
+    result = []
+    for i in range(n, 0, -1):
+        for j in range(n, 0, -1):
+            result.extend([j] * i)
+        result.append(-1)
+    return result
+
+# Example usage
+n = int(input("Enter n: "))  # Input value for n
+print(generate_pattern(n))
+34
