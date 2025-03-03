@@ -30,8 +30,28 @@
 # print(True) if 1 ==2 else print(False)
 
 
-list1 = [1,2,3,4]
+# list1 = [1,2,3,4]
 
 
-for i,e in enumerate(list1):
-    print(i,'-',e)
+# for i,e in enumerate(list1):
+#     print(i,'-',e)
+
+
+l = [1,2] * 3
+print(l)
+print(l[0])
+print(l[1])
+print(l[2])
+print(l[3])
+
+
+print(l[0] is l[1])
+print(l[0] is l[2])
+
+l[0] = 3
+
+print(l[0])
+print(l[1])
+print(l[2])
+print(l[3])
+print(l[4])
