@@ -56,13 +56,13 @@
 # print(l[3])
 # print(l[4])
 
-def fun( a,/):
-    print(a)    
+# def fun( a,/):
+#     print(a)    
 
-fun(a=1)
-#TypeError: fun() got some positional-only arguments passed as keyword arguments: 'a'
-def fun( *,a):
-    print(a)    
+# fun(a=1)
+# #TypeError: fun() got some positional-only arguments passed as keyword arguments: 'a'
+# def fun( *,a):
+#     print(a)    
 
-fun(1)
-#TypeError: fun() got some positional-only arguments passed as keyword arguments: 'a'
+# fun(1)
+# #TypeError: fun() got some positional-only arguments passed as keyword arguments: 'a'
