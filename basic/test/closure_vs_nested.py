@@ -1,10 +1,10 @@
-# def outer_function(msg):
-#     def inner_function():  
-#         print(f"Message: {msg}")  
+def outer_function(msg):
+    def inner_function():  
+        print(f"Message: {msg}")  
 
-#     inner_function()  
+    inner_function()  
 
-# outer_function("Hello, Nested Function!")  
+outer_function("Hello, Nested Function!")  
 
 def outer_closure_function(msg):
     def inner_closure_function():  
