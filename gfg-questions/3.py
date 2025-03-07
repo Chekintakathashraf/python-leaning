@@ -18,3 +18,37 @@ Constraints:
 
 
 
+def missingnumber(arr):
+    n = len(arr) + 1
+    total = n * (n + 1) // 2
+    return total - sum(arr)
+#or
+
+# def missingnumber(arr):
+#     total_of_arr = sum(arr)
+#     total_wanted = sum(range(1,len(arr)+2))
+    
+#     result = total_wanted - total_of_arr
+    
+#     return result
+
+""" 1 st method is good since 
+
+
+    Time Complexity
+        Using sum(range(1, n + 1)) is O(n) because it generates and sums the entire range.
+        Using n * (n + 1) // 2 is O(1) because it's a simple mathematical formula.
+        Best Choice: O(1) approach is better for large values of n (up to 10^6).
+
+    Space Complexity
+        Both approaches use O(1) space, so there's no difference.
+
+    Efficiency for Large Inputs
+        The formula version is significantly faster and doesn't need to create a list, making it better for performance."""
+
+
+# arr = [8, 2, 4, 5, 3, 7, 1]
+arr = [1, 2, 3, 5]
+print(missingnumber(arr))  
+
+
